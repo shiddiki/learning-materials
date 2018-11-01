@@ -1,2 +1,2 @@
 # learning-materials
-tutorials, books i have read or will read at future.
+tutorials, books i have read or intend to read.
