@@ -1,0 +1,70 @@
+Problem List
+
+TRIE
+Reading material:
+ https://algodast.quora.com/Trie-with-an-example
+
+Problem:
+http://www.spoj.com/problems/MORSE/
+http://www.spoj.com/problems/PRHYME/
+https://www.quora.com/What-is-the-toughest-coding-question-that-you-faced-in-an-interview/answer/Lalit-Kundu
+https://www.hackerrank.com/contests/inscription2015/challenges/the-natural-selection
+http://codeforces.com/problemset/problem/271/D
+http://codeforces.com/problemset/problem/706/D
+http://codeforces.com/problemset/problem/514/C
+http://codeforces.com/problemset/problem/455/B
+http://codeforces.com/problemset/problem/271/D
+https://www.hackerrank.com/challenges/xor-key
+https://www.codechef.com/problems/NPLFLF
+http://codeforces.com/contest/842/problem/D
+http://codeforces.com/problemset/problem/858/D
+https://www.hackerrank.com/challenges/no-prefix-set/problem
+http://codeforces.com/problemset/problem/665/E
+
+////
+*** Discussion on Codeforces http://codeforces.com/problemset/problem/706/D, Vasiliy's Multiset problem.
+////
+
+
+    final goal is to get the value which xor with y value is the maximum xor value.
+traversing the whole set to find the desired value will give time limit. the query range is huge. So, need to make a datastructure which may lead us to the maximum value.
+
+now, in order to get maximum xor value, we can be greedy. As we know what bits do we need to get the maximum value.
+
+suppose, we need to find a number which will give maximum value after xoring with 3(11). lets think of a 4bit number. The maximum number for this case can be,
+1100(12). this will give max 1111 number after xor operation. We will use this knowledge here.
+
+
+Solution:
+
+    consider everything in 32bit number.
+insert them in a trie. As there is erasing operation in the problem, we need a counter in each node to keep track of the number of subtree of the node.
+Now, for the maximum number finding...
+Consider the operand x in 32bit too, i.e. if it is 3(00000000000000000000000000000011); our desired number is (11111111111111111111111111111100)
+
+we will choose our desired edge from each node of the trie. If it is not possible then we will go the other edge.
+If you came to a node, then their will be at least an edge to go to, as all numbers are 32 bit.
+
+Thats it, go to the final node, the path is the bit sequence of your desired value. xoring with x is the answer.
+
+
+////
+*** Discussion on Codeforces http://codeforces.com/problemset/problem/271/D, Good Substrings problem.
+////
+
+    Solution:
+    
+    Simply insert each allowable(good) substrings to trie. Number of nodes of the trie is the answer.
+    This may give TLE.
+    
+    Optimization:
+    let our strings is: aabababa
+    let [0,4]characters are ok to be part of good string. 
+    add : a,ab,aab,aaba,aabab. This strings r ok to be in trie, but trie traversing takes total 1+2+3+4+5 = 15 iterations.
+          Though the have the same path, as each one is the prefix of the later one.
+        
+    Adding a, then a,b,a,b this only takes 5, but have the same effect on the trie. This is the optimization.
+    
+    Finally you can use dfs to count the nodes or any other way. After implementing the discussed optimization, still traversing the whole trie will not give tle.
+    
+    
